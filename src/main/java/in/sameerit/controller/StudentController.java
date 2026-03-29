@@ -23,6 +23,7 @@ public class StudentController {
 	@Autowired
 	private StudentRepository repo;
 	
+	
 	//method to load student form
 	
 	@GetMapping("/")
@@ -74,6 +75,17 @@ public class StudentController {
 		loadFormData(model);
 		
 		return "index";
+	}
+	
+	//method to display saved students data
+	
+	@GetMapping("/viewStudents")
+	public String getStudentsData(Model model) {
+		//logic to fetch and send students data
+		
+		List<StudentEntity> studentsList = repo.findAll();
+		model.addAttribute("students", studentsList);
+		return "data";
 	}
 	
 }
